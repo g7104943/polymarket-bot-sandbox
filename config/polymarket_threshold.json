@@ -1,0 +1,12 @@
+{
+  "prob_threshold": 0.65,
+  "do_predict_min": 0,
+  "top_k": 5,
+  "direction_filter": null,
+  "_comments": {
+    "prob_threshold": "概率阈值：P(方向) >= 此值才保留。0.55 表示至少 55% 置信度",
+    "do_predict_min": "do_predict 最小值：0=允许所有，1=仅 do_predict==1 时下注",
+    "top_k": "Top-K 过滤：只保留概率最高的 K 个预测，null 表示不限制。建议 3-5 避免资金分散",
+    "direction_filter": "方向过滤：'up' 只买涨, 'down' 只买跌, null 不过滤"
+  }
+}

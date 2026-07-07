@@ -1,0 +1,24 @@
+{
+  "freqai": {
+    "enabled": true,
+    "purge_old_models": 2,
+    "train_period_days": 2555,
+    "backtest_period_days": 7,
+    "identifier": "lightgbm_freqai",
+    "feature_parameters": {
+      "include_timeframes": ["15m", "1h", "4h"],
+      "include_corr_pairlist": [],
+      "label_period_candles": 1,
+      "include_shifted_candles": 0,
+      "indicator_periods": [5, 10, 20, 50]
+    },
+    "data_split_parameters": {
+      "test_size": 0.2,
+      "shuffle": false
+    },
+    "model_training_parameters": {
+      "n_estimators": 500,
+      "early_stopping_rounds": 50
+    }
+  }
+}

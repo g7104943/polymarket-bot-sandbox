@@ -1,0 +1,27 @@
+{
+  "name": "freqai-polymarket-trading",
+  "version": "1.0.0",
+  "description": "LightGBM-FreqAI 预测 + Polymarket 自动交易 TS 脚本",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node -e \"console.log('This sanitized export is for study only. Build or inspect code; live trading is disabled.');\"",
+    "start:trading": "node -e \"console.error('Disabled in this public learning export: live/automated trading is intentionally not supported.'); process.exit(1)\"",
+    "dev": "ts-node src/typescript/main.ts"
+  },
+  "dependencies": {
+    "@polymarket/clob-client": "^5.2.1",
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.0",
+    "ethers": "^6.16.0",
+    "mongodb": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

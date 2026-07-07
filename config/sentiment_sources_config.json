@@ -1,0 +1,93 @@
+{
+  "_comment": "情绪数据源配置 (Step 6.5) — 全部经过实测验证",
+  "sources": [
+    {
+      "name": "alternative_me_fng",
+      "description": "Fear & Greed Index 全历史 (2018至今)",
+      "type": "api",
+      "url": "https://api.alternative.me/fng/?limit=0",
+      "url_latest": "https://api.alternative.me/fng/?limit=1",
+      "metrics": ["fear_greed_index"],
+      "update_frequency": "daily",
+      "cost": "free_unlimited",
+      "api_key_required": false,
+      "rate_limit": "none",
+      "historical_data": true,
+      "historical_range": "2018-02-01 to present",
+      "priority": 1,
+      "verified": true,
+      "verified_date": "2026-02-06"
+    },
+    {
+      "name": "cryptocompare_news",
+      "description": "加密货币新闻聚合 (200+ 来源)",
+      "type": "api",
+      "url": "https://min-api.cryptocompare.com/data/v2/news/?lang=EN",
+      "metrics": ["news_volume_15m", "sentiment_score_15m", "social_volume_15m"],
+      "update_frequency": "realtime",
+      "cost": "free_unlimited",
+      "api_key_required": false,
+      "rate_limit": "none_observed",
+      "historical_data": false,
+      "priority": 2,
+      "verified": true,
+      "verified_date": "2026-02-06",
+      "notes": "返回约50条最新新闻，用 VADER 对标题做情绪评分"
+    },
+    {
+      "name": "vader_sentiment",
+      "description": "VADER 本地 NLP 情绪分析",
+      "type": "local",
+      "install": "pip install vaderSentiment",
+      "metrics": ["sentiment_score_15m (compound score, -1 to +1)"],
+      "cost": "free_unlimited",
+      "priority": 2,
+      "verified": true,
+      "notes": "金融文本情绪分析，比 TextBlob 更适合新闻标题"
+    },
+    {
+      "name": "derived_features",
+      "description": "本地 pandas 计算派生特征",
+      "type": "local",
+      "metrics": ["sentiment_spike", "sentiment_change_rate", "news_volume_spike"],
+      "cost": "free_unlimited",
+      "priority": 3,
+      "verified": true,
+      "notes": "基于上述数据源的历史序列计算"
+    },
+    {
+      "name": "cfgi_io_webhook",
+      "description": "CFGI.io Webhook 推送 15min FGI + social breakdown",
+      "type": "webhook",
+      "url_dashboard": "https://cfgi.io/developer",
+      "webhook_test": "https://webhook.site/",
+      "metrics": ["fear_greed_index_15m", "social_volume", "social_sentiment"],
+      "update_frequency": "15m",
+      "cost": "free_unlimited_via_webhook",
+      "cost_note": "Webhook 推送不扣 credits（免费无限）；API 拉取才消耗 credits（100 free）",
+      "api_key_required": true,
+      "requires_public_endpoint": true,
+      "setup_steps": [
+        "1. 注册 cfgi.io/developer 获取免费 account",
+        "2. 启动本地 webhook server (node scripts/cfgi_webhook_server.js)",
+        "3. 用 ngrok http 3002 暴露到公网",
+        "4. 在 CFGI dashboard 填入 ngrok URL + 选择 15m + BTC/ETH/SOL/XRP",
+        "5. 推送数据包含 FGI + 10 个 breakdown (social_volume, social_sentiment 等)"
+      ],
+      "priority": 2,
+      "verified": true,
+      "verified_date": "2026-02-06",
+      "notes": "推荐使用 webhook 模式（免费无限），不要用 API 拉取模式"
+    }
+  ],
+  "collection_config": {
+    "interval_minutes": 15,
+    "output_realtime": "data/sentiment/sentiment_realtime_15m.parquet",
+    "output_fng_history": "data/sentiment/fear_greed_history_daily.parquet",
+    "lookback_minutes_for_news": 20,
+    "spike_detection": {
+      "rolling_window": 20,
+      "std_multiplier": 2.0
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "_comment": "交易摩擦模拟配置（步骤 3）",
+  "default_slippage_ticks": 1.0,
+  "tick_size": 0.001,
+  "orderbook_depth_levels": 10,
+  "execution_delay_mean": 2.0,
+  "execution_delay_std": 1.0,
+  "min_order_size_usd": 10.0,
+  "fee_rate": 0.001
+}

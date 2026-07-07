@@ -1,0 +1,35 @@
+FROM freqtrade/freqtrade:develop
+
+# 安装PyTorch和相关依赖
+RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+
+# 创建必要的目录结构
+RUN mkdir -p /freqtrade/user_data/strategies \
+    && mkdir -p /freqtrade/user_data/freqaimodels \
+    && mkdir -p /freqtrade/user_data/freqaimodels/torch_components
+
+# 复制策略文件
+COPY user_data/strategies/ExampleLSTMStrategy.py /freqtrade/user_data/strategies/
+
+# 复制配置文件
+COPY user_data/config-torch.json /freqtrade/user_data/
+
+# 复制模型文件
+COPY user_data/freqaimodels/PyTorchLSTMRegressor.py /freqtrade/user_data/freqaimodels/
+COPY user_data/freqaimodels/__init__.py /freqtrade/user_data/freqaimodels/
+COPY user_data/freqaimodels/torch_components/ /freqtrade/user_data/freqaimodels/torch_components/
+
+# 设置工作目录
+WORKDIR /freqtrade
+
+# 设置环境变量
+ENV PYTHONPATH=/freqtrade/user_data:/freqtrade/user_data/freqaimodels:/freqtrade/freqtrade
+ENV FREQAI_MODEL_PATH=/freqtrade/user_data/freqaimodels
+ENV FREQTRADE_USER_DATA_DIR=/freqtrade/user_data
+ENV FREQTRADE_CONFIG=/freqtrade/user_data/config-torch.json
+
+# 验证安装
+RUN python -c "import torch; print(f'PyTorch version: {torch.__version__}')"
+RUN python -c "import freqtrade; print(f'Freqtrade version: {freqtrade.__version__}')"
+
+CMD ["freqtrade", "--help"] 

@@ -1,0 +1,16 @@
+{
+  "num_leaves": 104,
+  "max_depth": 5,
+  "learning_rate": 0.018897537492046736,
+  "n_estimators": 1698,
+  "min_child_samples": 83,
+  "reg_alpha": 0.023017981311104916,
+  "reg_lambda": 0.008817564239808508,
+  "min_split_gain": 0.03948257801653424,
+  "subsample": 0.6064802431718925,
+  "colsample_bytree": 0.8485023204367084,
+  "subsample_freq": 4,
+  "objective": "binary",
+  "metric": "auc",
+  "verbosity": -1
+}

@@ -1,0 +1,2 @@
+range_period=20
+range_multiplier=2.0

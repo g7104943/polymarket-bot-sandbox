@@ -1,0 +1,29 @@
+{
+  "model_thresholds": {
+    "models": 0.92,
+    "models_A": 0.51,
+    "models_B": 0.51,
+    "models_C": 0.51,
+    "models_v4": 0.51,
+    "models_A_v4": 0.51,
+    "models_B_old": 0.51,
+    "models_C_old": 0.51
+  },
+  "default_threshold": 0.92,
+  "enabled": {
+    "models": true,
+    "models_A": true,
+    "models_A_v4": true,
+    "models_B": true,
+    "models_B_old": true,
+    "models_C": true,
+    "models_C_old": true,
+    "models_v4": true
+  },
+  "_comments": {
+    "model_thresholds": "每个模型的置信度阈值（0-1之间），只有预测置信度 >= 此值才下注",
+    "default_threshold": "默认阈值，如果某个模型没有在model_thresholds中指定，则使用此值",
+    "enabled": "控制哪些模型参与回测，true表示启用，false表示禁用。如果某个模型未在此处指定，默认启用",
+    "说明": "可以单独修改每个模型的阈值，例如将models_B改为0.85，则只在该模型置信度>=85%时下注。也可以通过enabled对象控制哪些模型参与回测"
+  }
+}

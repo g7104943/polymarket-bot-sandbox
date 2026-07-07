@@ -1,0 +1,19 @@
+{
+  "system_name": "polyfun-next-arb-canary",
+  "live_enabled": false,
+  "clob_host": "https://clob.polymarket.com",
+  "gamma_host": "https://gamma-api.polymarket.com",
+  "pusd_address": "0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB",
+  "max_total_cost_usd": 5.0,
+  "target_payout_usd": 5.0,
+  "min_edge_usd": 0.03,
+  "min_edge_pct": 0.005,
+  "min_liquidity_usd": 10000.0,
+  "min_volume_usd": 1000.0,
+  "min_order_shares": 5.0,
+  "max_outcomes": 20,
+  "scan_limit": 100,
+  "order_type": "FOK",
+  "allow_non_atomic_live_execution": false,
+  "official_truth_required": true
+}
