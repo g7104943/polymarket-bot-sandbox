@@ -4,7 +4,7 @@
 
 ## What This Project Is
 
-Polyfun is an experimental research codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version intentionally keeps source code, example configuration, documentation, tests, and a small audited public learning model pack.
+Polyfun is an experimental research codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version intentionally keeps source code, example configuration, documentation, tests, and a single audited public ETH 15m learning model.
 
 ## What This Project Is Not
 
@@ -12,12 +12,12 @@ Polyfun is an experimental research codebase for studying short-horizon crypto p
 - It is not a reliable trading bot.
 - It is not ready for live Polymarket trading.
 - It does not include private keys, wallet files, real credentials, order ledgers, trained production/live models, raw data, or live runtime state.
-- The included models are small public LightGBM examples for learning and offline experimentation only.
+- The included model is a small public LightGBM example for learning and offline experimentation only.
 - It should not be connected to real funds without a complete independent security, legal, and trading-risk review.
 
 ## How This Repository Was Created
 
-This GitHub-ready version was generated from a private local research workspace by copying only a safe allowlist of files into a fresh repository. Large raw data, logs, private/live model artifacts, runtime state, and sensitive configuration were excluded. A compact set of public LightGBM example models was added after separate metadata, binary-string, and secret-pattern checks. The export was also checked for large files and common secret patterns before upload.
+This GitHub-ready version was generated from a private local research workspace by copying only a safe allowlist of files into a fresh repository. Large raw data, logs, private/live model artifacts, runtime state, and sensitive configuration were excluded. A compact public ETH 15m LightGBM example model was added after separate metadata, binary-string, and secret-pattern checks. The export was also checked for large files and common secret patterns before upload.
 
 ## Intended Use
 
@@ -25,13 +25,13 @@ Use this repository to learn from the project structure, inspect model/research 
 
 ## Included Public Model Pack
 
-This repository includes 12 small LightGBM example models under `data/models`:
+This repository includes one small LightGBM example model under `data/models`:
 
-- Symbols: `BTC/USDT`, `ETH/USDT`, `SOL/USDT`, `XRP/USDT`
-- Timeframes: `15m`, `1h`, `4h`
+- Symbol: `ETH/USDT`
+- Timeframe: `15m`
 - Files per model: `model.joblib` and `metadata.json`
 
-These models let readers inspect and load the predictor without retraining first. They are **not** the private live-trading models and are **not** sufficient to run a production trading system. Raw market data is intentionally not included; use your own data source for offline experiments.
+This model lets readers inspect and load the predictor without retraining first. It is **not** the private live-trading model and is **not** sufficient to run a production trading system. Raw market data is intentionally not included; use your own data source for offline experiments.
 
 See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples.
 
@@ -60,8 +60,9 @@ The notes below are preserved from the private research project for context. Som
 
 ## 功能概览
 
-- **交易对**: BTC/USDT, ETH/USDT, SOL/USDT, XRP/USDT  
-- **周期**: 15m, 1h, 4h  
+- **代码历史支持的交易对**: BTC/USDT, ETH/USDT, SOL/USDT, XRP/USDT  
+- **代码历史支持的周期**: 15m, 1h, 4h  
+- **本公开仓库内置模型**: 仅 `ETH/USDT 15m` 学习模型  
 - **预测**: 当前 K 线预测下一根 K 线 **UP (1)** / **DOWN (0)**  
 - **特征**: KDJ、Range、MACD、OBV、RSI、布林带、成交量等（Kdj.txt、Rang.txt 可调）  
 - **模型**: LightGBM 二分类，超参见 `config/lightgbm_params.json`  

@@ -1,23 +1,20 @@
 # Public Model Pack
 
-This repository includes a small audited model pack so readers can load the predictor without retraining models first.
+This repository includes a single audited ETH 15m model so readers can load the predictor without retraining models first.
 
 ## Purpose
 
 The model pack is for learning, code review, and offline experimentation. It is not a production trading model pack, it is not financial advice, and it must not be used to place automated Polymarket orders.
 
-## Included Models
+## Included Model
 
-The pack contains 12 LightGBM models:
+The pack contains one LightGBM model:
 
-| Symbol | Timeframes |
+| Symbol | Timeframe |
 | --- | --- |
-| `BTC/USDT` | `15m`, `1h`, `4h` |
-| `ETH/USDT` | `15m`, `1h`, `4h` |
-| `SOL/USDT` | `15m`, `1h`, `4h` |
-| `XRP/USDT` | `15m`, `1h`, `4h` |
+| `ETH/USDT` | `15m` |
 
-Each directory contains:
+The model directory contains:
 
 - `model.joblib`: LightGBM Booster serialized for local loading.
 - `metadata.json`: feature names, symbol, timeframe, training period metadata, and holdout metrics.
@@ -49,7 +46,7 @@ python scripts/verify_public_model_pack.py
 Expected output ends with something like:
 
 ```text
-Verified 12 public model directories.
+Verified 1 public model directory.
 ```
 
 ## Load One Model Manually

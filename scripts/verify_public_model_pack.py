@@ -11,10 +11,7 @@ from pathlib import Path
 import joblib
 
 EXPECTED = {
-    "BTC/USDT": {"15m", "1h", "4h"},
-    "ETH/USDT": {"15m", "1h", "4h"},
-    "SOL/USDT": {"15m", "1h", "4h"},
-    "XRP/USDT": {"15m", "1h", "4h"},
+    "ETH/USDT": {"15m"},
 }
 
 SECRET_HINT_RE = re.compile(
