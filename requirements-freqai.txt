@@ -1,0 +1,4 @@
+# Optional FreqAI/Freqtrade stack.
+# Install only if you specifically want to experiment with FreqAI workflows.
+# Some Python/platform combinations may need additional TA-Lib/pandas-ta setup.
+freqtrade>=2023.1

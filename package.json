@@ -5,9 +5,10 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "start": "node -e \"console.log('This sanitized export is for study only. Build or inspect code; live trading is disabled.');\"",
-    "start:trading": "node -e \"console.error('Disabled in this public learning export: live/automated trading is intentionally not supported.'); process.exit(1)\"",
-    "dev": "ts-node src/typescript/main.ts"
+    "start": "node -e \"console.log('Polyfun sandbox: use npm run start:simulation for paper mode or npm run start:trading for opt-in live mode.');\"",
+    "start:trading": "npm --prefix polymarket run predict-trade:live",
+    "dev": "ts-node src/typescript/main.ts",
+    "start:simulation": "npm --prefix polymarket run predict-trade"
   },
   "dependencies": {
     "@polymarket/clob-client": "^5.2.1",

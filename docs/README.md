@@ -24,4 +24,4 @@ If a legacy note conflicts with the root README or `PUBLIC_MODEL_PACK.md`, treat
 
 ## Safety Boundary
 
-This repository is an AI-assisted learning/research export. It is not a production trading system, not financial advice, and must not be used to place automated Polymarket orders.
+This repository is an AI-assisted learning/research export. It is not a production trading system and not financial advice. Optional live mode exists only as an explicit local opt-in template; simulation remains the default and safest way to study the code.

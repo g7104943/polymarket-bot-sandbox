@@ -43,10 +43,10 @@ Any hit must be reviewed before upload. Placeholder-only documentation is allowe
 - Final verification time: 2026-07-06 19:02:57 
 - Current export size after the ETH-only model update: about 13.2 MiB excluding local `.git` metadata.
 - Removed live/keychain/ops helper scripts from the public export.
-- Disabled npm live trading entrypoints with hard-fail messages.
-- Added a public-export guard in `polymarket/src/config/prediction_env.ts` that rejects `TRADING_MODE=live` during config creation.
-- Rewrote public-facing README files to state this is an AI-assisted learning/research export and must not be used for automated Polymarket ordering.
-- Removed live setup docs and real-order/runtime oriented artifacts.
+- Replaced hard-disabled npm live entrypoints with explicit local opt-in live guards.
+- Added a live-mode guard in `polymarket/src/config/prediction_env.ts` that rejects `TRADING_MODE=live` unless the user sets all required local confirmation flags.
+- Rewrote public-facing README files to state this is an AI-assisted learning/research export with optional self-custody live mode, not financial advice or a production trading system.
+- Removed private live setup artifacts, ledgers, runtime state, and real-order records. Added `docs/LIVE_TRADING.md` with local-only secret handling and risk warnings.
 
 ## Public Model Pack Update
 
@@ -63,7 +63,7 @@ Any hit must be reviewed before upload. Placeholder-only documentation is allowe
 ```text
 polyfun-next tests: 79 passed
 root tests: 6 passed
-live npm entrypoints: disabled with exit code 1
+live npm entrypoints: require explicit local opt-in flags before startup
 large files >5MB: none
 forbidden data/model/runtime artifacts: none; only the allowlisted ETH 15m model is tracked
 secret value pattern scan: no private-key/JWT/PEM-style values found

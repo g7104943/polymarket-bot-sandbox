@@ -1,10 +1,27 @@
 
-// Public learning export guard: this sanitized GitHub version is intentionally
-// not allowed to run automated live Polymarket trading. Keep simulation/research
-// workflows only; use a private fork and your own safety review for any live work.
-export function assertPublicExportNotLive(mode: string): void {
-    if (String(mode || '').toLowerCase() === 'live') {
-        throw new Error('Live/automated Polymarket trading is disabled in this public learning export.');
+type EnvRecord = Record<string, string | undefined>;
+
+// Public live-mode guard: live trading is allowed only after explicit local
+// opt-in. This prevents accidental orders from a fresh clone while keeping the
+// repository usable as a self-custody trading template for informed users.
+export function assertLiveTradingOptIn(mode: string, env: EnvRecord = process.env as EnvRecord): void {
+    if (String(mode || '').toLowerCase() !== 'live') return;
+
+    const liveEnabled = String(env.POLYFUN_ENABLE_LIVE_TRADING || '').toLowerCase() === 'true';
+    const understandsRisk = String(env.POLYFUN_I_UNDERSTAND_LIVE_RISK || '').toUpperCase() === 'YES';
+    const willNotCommitKeys = String(env.POLYFUN_I_WILL_NOT_COMMIT_KEYS || '').toUpperCase() === 'YES';
+
+    if (!liveEnabled || !understandsRisk || !willNotCommitKeys) {
+        throw new Error(
+            [
+                'Live/automated Polymarket trading is opt-in only.',
+                'Set all of these local .env values before live mode can start:',
+                '  POLYFUN_ENABLE_LIVE_TRADING=true',
+                '  POLYFUN_I_UNDERSTAND_LIVE_RISK=YES',
+                '  POLYFUN_I_WILL_NOT_COMMIT_KEYS=YES',
+                'Never commit real PRIVATE_KEY, API credentials, wallet files, ledgers, or logs.',
+            ].join('\n'),
+        );
     }
 }
 
@@ -336,8 +353,6 @@ const parsePriceRangeMap = (
 // 预测交易配置导出
 // ============================================================
 
-type EnvRecord = Record<string, string | undefined>;
-
 /**
  * 从环境变量字典构建 PredictionEnvConfig。
  * 多进程合并模式下，每个 trader 传入独立的 envVars（不读 process.env）；
@@ -346,7 +361,7 @@ type EnvRecord = Record<string, string | undefined>;
 export function createPredictionEnv(envVars?: EnvRecord) {
     const e: EnvRecord = envVars ?? (process.env as EnvRecord);
     const tradingMode = validateTradingMode(e.TRADING_MODE);
-    assertPublicExportNotLive(tradingMode);
+    assertLiveTradingOptIn(tradingMode, e);
     const riskEnabled = (e.RISK_CONTROL_ENABLED || 'false').toLowerCase() === 'true';
     const rawBetPctNormal = validateNumericRange('BET_PCT_NORMAL', e.BET_PCT_NORMAL, 0.05, 0.01, 0.50);
     const rawBetPctConservative = validateNumericRange('BET_PCT_CONSERVATIVE', e.BET_PCT_CONSERVATIVE, 0.03, 0.01, 0.20);
@@ -598,7 +613,6 @@ export const validatePredictionConfig = (env: PredictionEnvConfig = PREDICTION_E
     }
     
     if (env.TRADING_MODE === TradingMode.LIVE) {
-        assertPublicExportNotLive(env.TRADING_MODE);
         if (!env.PROXY_WALLET || !env.PRIVATE_KEY) {
             console.error('\n真实交易模式需要钱包配置\n');
             console.error('缺少: .env 文件中的 PROXY_WALLET 和/或 PRIVATE_KEY\n');

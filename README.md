@@ -1,19 +1,35 @@
-# Polyfun Research Sandbox
+# Polyfun Polymarket Bot Sandbox
 
-> **Public safety notice**: This repository is a sanitized, lightweight research export. It was created with extensive AI assistance and is shared for learning, code review, and experimentation only. It is **not** a production trading system and must **not** be used to place automated Polymarket orders.
+> **Public safety notice**: This repository is a sanitized, lightweight, AI-assisted research export. It can be studied in simulation mode and now includes an **opt-in live-trading template** for users who independently understand Polymarket, wallet custody, legal/compliance requirements, and trading risk. It is **not financial advice**, not a profitable trading promise, and not a production system.
 
 ## What This Project Is
 
-Polyfun is an experimental research codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version intentionally keeps source code, example configuration, documentation, tests, and a single audited public ETH 15m learning model.
+Polyfun is an experimental codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version keeps source code, example configuration, documentation, tests, and a single audited public ETH 15m learning model.
+
+## Can It Place Automated Polymarket Orders?
+
+Yes, the codebase contains a Polymarket CLOB execution path and can be configured for live trading by a user on their own machine. Live trading is **disabled by default** and requires all of these local-only settings:
+
+- `TRADING_MODE=live`
+- `POLYFUN_ENABLE_LIVE_TRADING=true`
+- `POLYFUN_I_UNDERSTAND_LIVE_RISK=YES`
+- `POLYFUN_I_WILL_NOT_COMMIT_KEYS=YES`
+- a local `.env` containing the user's own `PRIVATE_KEY`, `PROXY_WALLET`, `RPC_URL`, and optional CLOB API credentials
+
+Never put real keys in GitHub, screenshots, issues, logs, notebooks, or pull requests. A private key controls funds. If it leaks, assume the wallet is compromised.
+
+## What Can Go Wrong
+
+Automated trading can lose money quickly. Specific risks include bad model predictions, stale markets, order rejections, partial fills, network/API failures, accidental repeated orders, settlement/claim issues, platform rule changes, local bugs, and legal or regional restrictions. Users are responsible for reviewing Polymarket's current rules and laws in their jurisdiction before using any live mode.
 
 ## What This Project Is Not
 
 - It is not financial advice.
-- It is not a reliable trading bot.
-- It is not ready for live Polymarket trading.
-- It does not include private keys, wallet files, real credentials, order ledgers, trained production/live models, raw data, or live runtime state.
-- The included model is a small public LightGBM example for learning and offline experimentation only.
-- It should not be connected to real funds without a complete independent security, legal, and trading-risk review.
+- It is not a reliable or profitable trading bot.
+- It is not a managed service and does not protect users from losses.
+- It does not include private keys, wallet files, real credentials, order ledgers, raw market data, private runtime state, or private live-trading logs.
+- The included model is a small public LightGBM example for learning and offline experimentation.
+- It should not be connected to real funds without a complete independent security, legal, trading-risk, and code review.
 
 ## How This Repository Was Created
 
@@ -21,7 +37,7 @@ This GitHub-ready version was generated from a private local research workspace 
 
 ## Intended Use
 
-Use this repository to learn from the project structure, inspect model/research scripts, run local simulations, or adapt parts of the code in a private sandbox. Keep all experiments in simulation mode unless you fully understand and independently rebuild the trading, wallet, risk, compliance, and monitoring layers.
+Use this repository to learn from the project structure, inspect model/research scripts, run local simulations, or adapt parts of the code in a private sandbox. If you use live mode, start tiny, use a dedicated wallet, verify every generated order, and keep all secrets outside Git.
 
 ## Included Public Model Pack
 
@@ -31,11 +47,11 @@ This repository includes one small LightGBM example model under `data/models`:
 - Timeframe: `15m`
 - Files: `model.joblib` and `metadata.json`
 
-This model lets readers inspect and load the predictor without retraining first. It is **not** the private live-trading model and is **not** sufficient to run a production trading system. Raw market data is intentionally not included; use your own data source for offline experiments.
+This model lets readers inspect and load the predictor without retraining first. It is **not** the private live-trading model and is **not** sufficient by itself to guarantee profitable trading. Raw market data is intentionally not included; use your own data source for offline experiments.
 
-See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples. See [docs/README.md](docs/README.md) for how to read legacy research notes that mention assets or model families not included in this public export.
+See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples. See [docs/LIVE_TRADING.md](docs/LIVE_TRADING.md) for the opt-in live-mode checklist. See [docs/README.md](docs/README.md) for how to read legacy research notes that mention assets or model families not included in this public export.
 
-## Quick Start (Simulation / Research Only)
+## Quick Start (Simulation / Research)
 
 ```bash
 python -m venv .venv
@@ -46,7 +62,21 @@ cp .env.example .env
 python scripts/verify_public_model_pack.py
 ```
 
-Keep `TRADING_MODE=simulation` in `.env`. Do not add real wallet keys to this public repository.
+Keep `TRADING_MODE=simulation` while learning. Do not add real wallet keys unless you are intentionally using the opt-in live flow in [docs/LIVE_TRADING.md](docs/LIVE_TRADING.md).
+
+Optional legacy FreqAI/Freqtrade experiments are separated into `requirements-freqai.txt`; the default install intentionally avoids that heavier stack.
+
+## Optional Live Mode
+
+Live mode is intentionally friction-heavy. It requires local environment variables and will refuse to start unless the explicit risk-confirmation flags are present.
+
+```bash
+cp .env.example .env
+# edit .env locally; never commit it
+npm run start:trading
+```
+
+The live command reads local predictions and can submit real Polymarket orders only after the local `.env` has enabled live mode and supplied wallet credentials. The repository does not ship private keys or a complete production deployment.
 
 ---
 
@@ -163,7 +193,7 @@ npm run build
 ```
 
 - 轮询 `GET /predict`，用于本地研究和模拟。  
-- Public export should remain in `TRADING_MODE=simulation`; live execution code is historical/research context only.  
+- Public forks should default to `TRADING_MODE=simulation`; live execution is optional, local-only, and guarded by the explicit opt-in flow in `docs/LIVE_TRADING.md`.
 
 ## 配置说明
 

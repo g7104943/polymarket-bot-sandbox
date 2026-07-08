@@ -1,6 +1,5 @@
-# LightGBM-FreqAI 加密货币预测
-# 独立训练可不装 freqtrade；要用 FreqAI 必须装
-freqtrade>=2023.1
+# Core dependencies for the public learning/export repository.
+# Keep this file lightweight so `pip install -r requirements.txt` works for README quick start.
 lightgbm>=4.0.0
 pandas>=2.0.0
 numpy>=1.24.0

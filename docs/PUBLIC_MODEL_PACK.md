@@ -4,7 +4,7 @@ This repository includes a single audited ETH 15m model so readers can load the 
 
 ## Purpose
 
-The model pack is for learning, code review, and offline experimentation. It is not a production trading model pack, it is not financial advice, and it must not be used to place automated Polymarket orders.
+The model pack is for learning, code review, and experimentation. It is not a production trading model pack, it is not financial advice, and it does not by itself make automated Polymarket trading safe or profitable. If you use live mode, follow the separate opt-in checklist in `LIVE_TRADING.md` and use your own independent risk review.
 
 ## Included Model
 
@@ -19,7 +19,7 @@ The model directory contains:
 - `model.joblib`: LightGBM Booster serialized for local loading.
 - `metadata.json`: feature names, symbol, timeframe, training period metadata, and holdout metrics.
 
-Raw market data is intentionally not included. To generate predictions, provide your own OHLCV data and keep all experiments in simulation or offline research mode.
+Raw market data is intentionally not included. To generate predictions, provide your own OHLCV data. Simulation mode is the default; live mode requires explicit local opt-in and wallet configuration.
 
 ## Security Notes
 
