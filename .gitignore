@@ -56,7 +56,7 @@ config.yaml
 credentials/
 
 # Runtime / trading state / official data / large research outputs
-/data/
+/data/*
 /reports/
 /logs/
 /logs*/
@@ -89,3 +89,12 @@ polymarket/backup_*/
 *.bak_*
 *.backup
 backup_*/
+
+# Public learning model pack allowlist.
+# Keep raw data and arbitrary model artifacts ignored, but allow the small
+# audited LightGBM examples documented in docs/PUBLIC_MODEL_PACK.md.
+!/data/
+!/data/models/
+!/data/models/lightgbm_*_USDT_*_20260121_014635/
+!/data/models/lightgbm_*_USDT_*_20260121_014635/model.joblib
+!/data/models/lightgbm_*_USDT_*_20260121_014635/metadata.json

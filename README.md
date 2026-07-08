@@ -4,23 +4,36 @@
 
 ## What This Project Is
 
-Polyfun is an experimental research codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version intentionally keeps only source code, example configuration, documentation, and tests.
+Polyfun is an experimental research codebase for studying short-horizon crypto prediction, feature engineering, model evaluation, and prediction-market execution ideas. The original private project included live-trading experiments, local market data, model artifacts, and wallet-specific runtime state. This public version intentionally keeps source code, example configuration, documentation, tests, and a small audited public learning model pack.
 
 ## What This Project Is Not
 
 - It is not financial advice.
 - It is not a reliable trading bot.
 - It is not ready for live Polymarket trading.
-- It does not include private keys, wallet files, real credentials, order ledgers, trained production models, raw data, or live runtime state.
+- It does not include private keys, wallet files, real credentials, order ledgers, trained production/live models, raw data, or live runtime state.
+- The included models are small public LightGBM examples for learning and offline experimentation only.
 - It should not be connected to real funds without a complete independent security, legal, and trading-risk review.
 
 ## How This Repository Was Created
 
-This GitHub-ready version was generated from a private local research workspace by copying only a safe allowlist of files into a fresh repository. Large data, logs, model artifacts, runtime state, and sensitive configuration were excluded. The export was also checked for large files and common secret patterns before upload.
+This GitHub-ready version was generated from a private local research workspace by copying only a safe allowlist of files into a fresh repository. Large raw data, logs, private/live model artifacts, runtime state, and sensitive configuration were excluded. A compact set of public LightGBM example models was added after separate metadata, binary-string, and secret-pattern checks. The export was also checked for large files and common secret patterns before upload.
 
 ## Intended Use
 
 Use this repository to learn from the project structure, inspect model/research scripts, run local simulations, or adapt parts of the code in a private sandbox. Keep all experiments in simulation mode unless you fully understand and independently rebuild the trading, wallet, risk, compliance, and monitoring layers.
+
+## Included Public Model Pack
+
+This repository includes 12 small LightGBM example models under `data/models`:
+
+- Symbols: `BTC/USDT`, `ETH/USDT`, `SOL/USDT`, `XRP/USDT`
+- Timeframes: `15m`, `1h`, `4h`
+- Files per model: `model.joblib` and `metadata.json`
+
+These models let readers inspect and load the predictor without retraining first. They are **not** the private live-trading models and are **not** sufficient to run a production trading system. Raw market data is intentionally not included; use your own data source for offline experiments.
+
+See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples.
 
 ## Quick Start (Simulation / Research Only)
 
@@ -30,6 +43,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 npm install
 cp .env.example .env
+python scripts/verify_public_model_pack.py
 ```
 
 Keep `TRADING_MODE=simulation` in `.env`. Do not add real wallet keys to this public repository.
