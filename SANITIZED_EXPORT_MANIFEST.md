@@ -41,7 +41,7 @@ Any hit must be reviewed before upload. Placeholder-only documentation is allowe
 ## Final Sanitization Notes
 
 - Final verification time: 2026-07-06 19:02:57 
-- Final export size: about 9.8 MB.
+- Current export size after the ETH-only model update: about 13.2 MiB excluding local `.git` metadata.
 - Removed live/keychain/ops helper scripts from the public export.
 - Disabled npm live trading entrypoints with hard-fail messages.
 - Added a public-export guard in `polymarket/src/config/prediction_env.ts` that rejects `TRADING_MODE=live` during config creation.
@@ -62,10 +62,10 @@ Any hit must be reviewed before upload. Placeholder-only documentation is allowe
 
 ```text
 polyfun-next tests: 79 passed
-root tests: 5 passed
+root tests: 6 passed
 live npm entrypoints: disabled with exit code 1
 large files >5MB: none
-forbidden data/model/runtime artifacts: none
+forbidden data/model/runtime artifacts: none; only the allowlisted ETH 15m model is tracked
 secret value pattern scan: no private-key/JWT/PEM-style values found
 ```
 
