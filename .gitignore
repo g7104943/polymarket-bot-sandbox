@@ -92,7 +92,7 @@ backup_*/
 
 # Public learning model pack allowlist.
 # Keep raw data and arbitrary model artifacts ignored, but allow the small
-# audited LightGBM examples documented in docs/PUBLIC_MODEL_PACK.md.
+# audited ETH 15m LightGBM example documented in docs/PUBLIC_MODEL_PACK.md.
 !/data/
 !/data/models/
 !/data/models/lightgbm_ETH_USDT_15m_20260121_014635/

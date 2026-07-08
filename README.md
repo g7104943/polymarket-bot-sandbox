@@ -29,11 +29,11 @@ This repository includes one small LightGBM example model under `data/models`:
 
 - Symbol: `ETH/USDT`
 - Timeframe: `15m`
-- Files per model: `model.joblib` and `metadata.json`
+- Files: `model.joblib` and `metadata.json`
 
 This model lets readers inspect and load the predictor without retraining first. It is **not** the private live-trading model and is **not** sufficient to run a production trading system. Raw market data is intentionally not included; use your own data source for offline experiments.
 
-See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples.
+See [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md) for verification and loading examples. See [docs/README.md](docs/README.md) for how to read legacy research notes that mention assets or model families not included in this public export.
 
 ## Quick Start (Simulation / Research Only)
 
@@ -52,7 +52,7 @@ Keep `TRADING_MODE=simulation` in `.env`. Do not add real wallet keys to this pu
 
 ## Original Project Notes
 
-The notes below are preserved from the private research project for context. Some paths or workflows may refer to local data/model artifacts that are intentionally not included in this public export.
+The notes below are preserved from the private research project for context. Some paths or workflows may refer to local data/model artifacts that are intentionally not included in this public export. The current bundled model truth is only `ETH/USDT 15m`; references to other assets, timeframes, GRU models, local parquet data, or private report paths are legacy research context unless explicitly documented in [docs/PUBLIC_MODEL_PACK.md](docs/PUBLIC_MODEL_PACK.md).
 
 # LightGBM-FreqAI 加密货币预测与 Polymarket 自动交易系统
 

@@ -12,7 +12,7 @@
 - A single audited public ETH 15m LightGBM learning model under `data/models`:
   - `ETH/USDT`
   - `15m`
-  - `model.joblib` plus `metadata.json` per model
+  - `model.joblib` plus `metadata.json` for the model
 - polyfun-next source, scripts, docs, tests, pyproject, and `config/*.example.json` only.
 - polymarket source, scripts, docs, dependency manifests, and example environment files only.
 
@@ -56,7 +56,7 @@ Any hit must be reviewed before upload. Placeholder-only documentation is allowe
 - Individual model files are below 5 MB.
 - Model metadata and binary strings were scanned for private-key, mnemonic, password, token, wallet, PEM key, and local-path patterns.
 - The pack is documented in `docs/PUBLIC_MODEL_PACK.md` and checked by `scripts/verify_public_model_pack.py`.
-- These are public learning examples, not private live-trading models.
+- This is a public learning example, not a private live-trading model.
 
 ## Verification Performed
 
